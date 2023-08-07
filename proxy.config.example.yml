@@ -1,0 +1,6 @@
+domains:
+    mg.yourdomain.com:
+        to: youremail@yourdomain.com
+        uris:
+            - https://www.yourdomain.com
+            - https://yourdomain.com

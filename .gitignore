@@ -23,3 +23,5 @@ node_modules
 .cache
 *.coverage
 htmlcov/
+
+proxy.config.yml
