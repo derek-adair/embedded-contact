@@ -25,3 +25,4 @@ node_modules
 htmlcov/
 
 proxy.config.yml
+.env
