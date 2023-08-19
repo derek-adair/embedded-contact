@@ -1,6 +1,8 @@
 import "vee-validate/dist/vee-validate.js";
 
 import { createApp } from "vue";
-import App from "./App.vue";
+import Contact from "./Contact.vue";
+import AltContact from "./AltContact.vue";
 
-createApp(App).mount("#vue");
+createApp(Contact).mount("#form1");
+createApp(AltContact).mount("#form2");
