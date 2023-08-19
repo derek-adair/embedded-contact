@@ -1,41 +1,49 @@
 <template>
-    <div id="app">
-	<Form @submit="onSubmit">
-	    <Field name="email" type="email" :rules="validateEmail" />
-	    <ErrorMessage name="email" />
-	    <button>Sign up for newsletter</button>
-	    </form>
-    </div>
+    <DynamicForm :schema="formSchema" />
 </template>
 
 <script>
-import { Form, Field, ErrorMessage } from 'vee-validate';
+import DynamicForm from '@/components/DynamicForm.vue';
+import * as Yup from 'yup';
 
 export default {
     components: {
-	Form,
-	Field,
-	ErrorMessage,
+        DynamicForm
     },
-    methods: {
-	onSubmit(values) {
-	    console.log(values);
-	},
-	validateEmail(value) {
-	    // if the field is empty
-	    if (!value) {
-		return 'This field is required';
-	    }
+    data: () => {
+        const formSchema = {
+            fields: [
+                {
+                    label: "Name",
+                    name: 'name',
+                    as: 'input',
+                    rules: Yup.string().required(),
+                },
+                {
+                    label: "Email",
+                    name: 'email',
+                    as: 'input',
+                    rules: Yup.string().required(),
+                },
+                {
+                    label: "Phone",
+                    name: 'phone',
+                    as: 'input',
+                    rules: Yup.number().min(10).required(),
+                },
+                {
+                    label: "Message",
+                    name: 'message',
+                    as: 'input',
+                    rules: Yup.string().required(),
+                },
+            ]
+        }
 
-	    // if the field is not a valid email
-	    const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-	    if (!regex.test(value)) {
-		return 'This field must be a valid email';
-	    }
-
-	    // All is good
-	    return true;
-	},
-    },
+        return {
+            formSchema
+        }
+    }
 }; 
+
 </script>

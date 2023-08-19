@@ -26,3 +26,6 @@ htmlcov/
 
 proxy.config.yml
 .env
+
+# UI files
+dist/
