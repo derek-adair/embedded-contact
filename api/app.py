@@ -47,6 +47,7 @@ def email():
     domain_config = config['domains'][mg_domain]
 
     if request.origin not in domain_config['uris']:
+        app.logger.debug("Domain not found in uri config")
         return abort(400)
 
     endpoint = 'https://api.mailgun.net/v3/{}/messages'.format(mg_domain)
@@ -61,6 +62,7 @@ def email():
     if response.ok:
         return response.text
     else:
+        app.logger.debug("response {0}: {1}".format(response.status_code, response.text))
         return abort(response.status_code)
 
 
