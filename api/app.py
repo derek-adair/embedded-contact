@@ -40,11 +40,19 @@ def get_config_key(request):
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": origins}})
+
 @app.route('/', methods=['POST'])
 def email():
     # Automatically read MG_DOMAIN
     mg_domain = get_config_key(request)
     domain_config = config['domains'][mg_domain]
+
+    email_data = {
+        # from defaults to postmaster@{mg_domain}
+        "from": "postmaster@{}".format(mg_domain),
+        # to read from config
+        "to": domain_config['to']
+    }
 
     if request.origin not in domain_config['uris']:
         app.logger.debug("Domain not found in uri config")
@@ -52,12 +60,13 @@ def email():
 
     endpoint = 'https://api.mailgun.net/v3/{}/messages'.format(mg_domain)
     email = request.get_json()
-    email['to'] = domain_config['to']
 
-    app.logger.info("sending email to {}".format(email['to']))
+    email_data.update(email)
+
+    app.logger.info("sending email to {}".format(email_data['to']))
     app.logger.debug("Endpoint: {}".format(endpoint))
 
-    response = req.post(endpoint, auth=('api', MG_KEY), data=email)
+    response = req.post(endpoint, auth=('api', MG_KEY), data=email_data)
 
     if response.ok:
         return response.text
