@@ -1,5 +1,5 @@
 <template>
-  <Form>
+  <Form @submit="onSubmit" action="http://localhost:8888">
     <div
         v-for="{ as, name, label, ...attrs } in schema.fields" 
         :key="name"
@@ -15,6 +15,7 @@
 
 <script>
 import { Form, Field, ErrorMessage } from 'vee-validate';
+import axios from 'axios';
 
 export default {
   name: 'DynamicForm',
@@ -29,5 +30,35 @@ export default {
       required: true,
     },
   },
+  methods: {
+      onSubmit(values, {evt}) {
+      axios(evt.target.action, {
+        headers: {
+          'Access-Control-Allow-Origin': evt.target.action 
+        },
+        method: 'POST',
+        data: {
+          'name': this.name,
+          'subject': [this.name, this.phone].join(" "),
+          'text': [
+            "Name: " + this.name,
+            "Number: " + this.phone,
+            "Year: " + this.year,
+            "Make: " + this.make,
+            "Model: " + this.model,
+            "Summary: " + this.summary,
+          ].join("\n"),
+          'from': this.from
+        }	
+      })
+        .then(function(response){
+          app.showForm = false
+        })
+        .catch(function(error){
+          console.log(error)
+        })
+
+    }
+  }
 };
 </script>
