@@ -21,7 +21,7 @@ export default {
                 },
                 {
                     label: "Email",
-                    name: 'email',
+                    name: 'from',
                     as: 'input',
                     rules: Yup.string().required(),
                 },

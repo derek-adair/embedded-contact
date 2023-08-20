@@ -14,20 +14,8 @@ export default {
         const formSchema = {
             fields: [
                 {
-                    label: "Company",
-                    name: 'company',
-                    as: 'input',
-                    rules: Yup.string().required(),
-                },
-                {
                     label: "Name",
                     name: 'name',
-                    as: 'input',
-                    rules: Yup.string().required(),
-                },
-                {
-                    label: "Email",
-                    name: 'email',
                     as: 'input',
                     rules: Yup.string().required(),
                 },

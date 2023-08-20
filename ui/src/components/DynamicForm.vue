@@ -1,16 +1,16 @@
 <template>
-  <Form @submit="onSubmit" action="http://localhost:8888">
-    <div
-        v-for="{ as, name, label, ...attrs } in schema.fields" 
-        :key="name"
-    >
-      <label :for="name">{{ label }}</label>
-      <Field :as="as" :id="name" :name="name" v-bind="attrs"/>
-      <ErrorMessage :name="name" />
-    </div>
+    <Form @submit="onSubmit" action="http://localhost:8888">
+        <div
+            v-for="{ as, name, label, ...attrs } in schema.fields" 
+            :key="name"
+            >
+            <label :for="name">{{ label }}</label>
+            <Field :as="as" :id="name" :name="name" v-bind="attrs"/>
+            <ErrorMessage :name="name" />
+        </div>
 
-    <button>Submit</button>
-  </Form>
+        <button>Submit</button>
+    </Form>
 </template>
 
 <script>
@@ -18,47 +18,44 @@ import { Form, Field, ErrorMessage } from 'vee-validate';
 import axios from 'axios';
 
 export default {
-  name: 'DynamicForm',
-  components: {
-    Form,
-    Field,
-    ErrorMessage,
-  },
-  props: {
-    schema: {
-      type: Object,
-      required: true,
+    name: 'DynamicForm',
+    components: {
+        Form,
+        Field,
+        ErrorMessage,
     },
-  },
-  methods: {
-      onSubmit(values, {evt}) {
-      axios(evt.target.action, {
-        headers: {
-          'Access-Control-Allow-Origin': evt.target.action 
+    props: {
+        schema: {
+            type: Object,
+            required: true,
         },
-        method: 'POST',
-        data: {
-          'name': this.name,
-          'subject': [this.name, this.phone].join(" "),
-          'text': [
-            "Name: " + this.name,
-            "Number: " + this.phone,
-            "Year: " + this.year,
-            "Make: " + this.make,
-            "Model: " + this.model,
-            "Summary: " + this.summary,
-          ].join("\n"),
-          'from': this.from
-        }	
-      })
-        .then(function(response){
-          app.showForm = false
-        })
-        .catch(function(error){
-          console.log(error)
-        })
+    },
+    methods: {
+        onSubmit(values, {evt}) {
+            let post_data = {
+                    'from': values.from,
+                    'text': [
+                        "Name: " + values.name,
+                        "Number: " + values.phone,
+                        "Message: " + values.message,
+                    ].join("\n")
+                }	
 
+            axios(evt.target.action, {
+                headers: {
+                    'Access-Control-Allow-Origin': evt.target.action 
+                },
+                method: 'POST',
+                data: post_data
+            })
+                .then(function(response){
+                    app.showForm = false
+                })
+                .catch(function(error){
+                    console.log(error)
+                })
+
+        }
     }
-  }
 };
 </script>
