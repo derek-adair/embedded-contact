@@ -1,5 +1,8 @@
 <template>
-    <Form @submit="onSubmit" action="http://localhost:8888">
+    <div v-if="formSubmitted">
+        <h2>Thank you for reaching out</h2>
+    </div>
+    <Form v-else  @submit="onSubmit" action="http://localhost:8888">
         <div
             v-for="{ as, name, label, ...attrs } in schema.fields" 
             :key="name"
@@ -24,6 +27,11 @@ export default {
         Field,
         ErrorMessage,
     },
+    data: () => {
+        return {
+            formSubmitted: false
+        }
+    },
     props: {
         schema: {
             type: Object,
@@ -31,34 +39,36 @@ export default {
         },
     },
     methods: {
+        markFormSubmitted() {
+            this.$data.formSubmitted = true;
+        },
         onSubmit(values, {evt}) {
             let 
                 text_arr = [],
-                post_data
+                post_data,
+                cmp = this
             ;
+
 
             for (const property in values) {
                 text_arr.push(`${property}: ${values[property]}`) 
             }
 
             post_data = {
-                    'from': values.from,
-                    'text': text_arr.join("\n")
+                'from': values.from,
+                'text': text_arr.join("\n")
             }	
-
             axios(evt.target.action, {
                 headers: {
                     'Access-Control-Allow-Origin': evt.target.action 
                 },
                 method: 'POST',
                 data: post_data
+            }).then(function(response){
+                cmp.markFormSubmitted();
+            }).catch(function(error){
+                console.log(error)
             })
-/*                .then(function(response){
-                    this.showForm = false
-                })*/
-                .catch(function(error){
-                    console.log(error)
-                })
 
         }
     }
