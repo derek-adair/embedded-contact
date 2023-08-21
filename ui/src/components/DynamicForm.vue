@@ -32,14 +32,19 @@ export default {
     },
     methods: {
         onSubmit(values, {evt}) {
-            let post_data = {
+            let 
+                text_arr = [],
+                post_data
+            ;
+
+            for (const property in values) {
+                text_arr.push(`${property}: ${values[property]}`) 
+            }
+
+            post_data = {
                     'from': values.from,
-                    'text': [
-                        "Name: " + values.name,
-                        "Number: " + values.phone,
-                        "Message: " + values.message,
-                    ].join("\n")
-                }	
+                    'text': text_arr.join("\n")
+            }	
 
             axios(evt.target.action, {
                 headers: {
@@ -48,9 +53,9 @@ export default {
                 method: 'POST',
                 data: post_data
             })
-                .then(function(response){
-                    app.showForm = false
-                })
+/*                .then(function(response){
+                    this.showForm = false
+                })*/
                 .catch(function(error){
                     console.log(error)
                 })
