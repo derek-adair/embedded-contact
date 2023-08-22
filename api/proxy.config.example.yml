@@ -2,5 +2,6 @@ domains:
     mg.yourdomain.com:
         to: youremail@yourdomain.com
         uris:
+            - http://localhost:8777/
             - https://www.yourdomain.com
             - https://yourdomain.com

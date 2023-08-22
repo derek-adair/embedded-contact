@@ -1,8 +1,8 @@
 version: '3.1'
 services:
-  ui:
+  form-generator:
     build:
-        context: ui
+        context: form-generator
     command: yarn run dev
     ports:
       - 8777:8777
