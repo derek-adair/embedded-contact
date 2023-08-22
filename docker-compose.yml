@@ -7,7 +7,7 @@ services:
     ports:
       - 8777:8777
     volumes:
-      - ./ui:/code
+      - ./form-generator:/code
   email-proxy:
     build:
         context: api

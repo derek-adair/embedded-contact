@@ -39,11 +39,13 @@ domains:
 Any requests from `yourdomain.com` with valid json will be processed and submitted to mailgun.
 
 **json request**
+```
 {
     "text": "Message submitted to mailgun",
     "from": "usersubmitted@email.com"
 }
-*NOTE*: the from field is optional.  If a "from" email isn't submitted it will default to postmaster@<yourdomain>.com
+```
+*NOTE*: the from field is optional.  If a "from" email isn't submitted it will default to `postmaster@<yourdomain>.com`
 
 ### The Form Generator
 This code base was scaffolded w/ the `npm create vue@latest` and installed w/ yarn.  You can read more about what this code means [here](https://vuejs.org/guide/essentials/application.html).  
@@ -55,8 +57,8 @@ All you *need* to grok to leverage this project is the field structure;
 * The `rules` is how you validate.  [Yup](https://github.com/jquense/yup) comes installed but you can use validation rules you want.
 * Any additional properties will be rendered as field properties (e.g. type='password' will make it a password field)
 
-##### Easy to build
-`docker-compose run --rm ui yarn build`
+#### Easy to build
+`docker-compose run --rm form-generator yarn build`
 
 #### Details
 The heart of this generator is the [DynamicForm](https://github.com/derek-adair/flask-mailgun-proxy/blob/fd9d72eab30901bd5b46134aaf1688a75bee17ca/form-generator/src/components/DynamicForm.vue) component.  This is where you can see that this generator uses [VeeValidate](https://vee-validate.logaretm.com/v4/) and is just a copy of their [form generator tutorial](https://vee-validate.logaretm.com/v4/tutorials/dynamic-form-generator/) with an [axios](https://axios-http.com/docs/intro) call that [parses the form](https://github.com/derek-adair/flask-mailgun-proxy/blob/fd9d72eab30901bd5b46134aaf1688a75bee17ca/form-generator/src/components/DynamicForm.vue#L53).
@@ -78,28 +80,22 @@ createApp(NewForm).mount("#newForm");
 ```
 <div id="newForm"></div>
 ```
+3. Point your forms by editin DynamicForm's template action (defaults to the docker-compose localhost)
+```
+<Form v-else  @submit="onSubmit" action="{YOUR_PRODUCTION_URI}">
+```
 
-3. **Build your forms:**
+4. **Build your forms:**
 ```
-docker-compose run --rm ui yarn run build
+docker-compose run --rm form-generator yarn run build
 ```
-4. 
-3. *for production:* The [DynamicForm.vue](https://github.com/derek-adair/flask-mailgun-proxy/blob/fd9d72eab30901bd5b46134aaf1688a75bee17ca/form-generator/src/components/DynamicForm.vue) points to your localhost by default.  It's imperative you change this URL in production.
+Then you can embed the files generated in `./form-generator/src/dist`.
+
+*NOTE*: This will be owned by your docker user, you may need to edit permissions.
 
 ## Build tools
 I prefer to develop against docker images using docker-compose.  It's a little awkward at first but anyone with knowledge of docker can quite easily mimic my development workflow precisely with several commands.
 
-
-1. Build the docker image
-```
-docker-compose build
-```
-2. Create a .env and add MG_KEY=`yourkey`
-
-3. Copy/adapt `proxy.config.example.yml` to `proxy.config.yml`
-
-4. `docker-compose up`
-
-### Useful Commands
+**Useful Commands**
 * Connect to running container with [docker exec](https://docs.docker.com/engine/reference/commandline/exec/);  `docker exec -it flask-email-proxy_ui_1 bash -il`.
 * Spin up a disposable container `docker-compose run --rm --service-ports ui` 
