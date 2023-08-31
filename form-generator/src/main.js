@@ -1,8 +1,8 @@
 import "vee-validate/dist/vee-validate.js";
 
 import { createApp } from "vue";
-import Contact from "./Contact.vue";
-import AltContact from "./AltContact.vue";
+import BookAnAppointment from "./BookAnAppointment.vue";
+import FleetContact from "./FleetContact.vue";
 
-createApp(Contact).mount("#form1");
-createApp(AltContact).mount("#form2");
+createApp(BookAnAppointment).mount("#book-an-appointment");
+createApp(FleetContact).mount("#fleet-contact");

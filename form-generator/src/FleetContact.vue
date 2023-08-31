@@ -14,14 +14,14 @@ export default {
         const formSchema = {
             fields: [
                 {
-                    label: "Name",
-                    name: 'name',
+                    label: "Email",
+                    name: 'from',
                     as: 'input',
                     rules: Yup.string().required(),
                 },
                 {
-                    label: "Email",
-                    name: 'from',
+                    label: "Point Of Contact",
+                    name: 'contact',
                     as: 'input',
                     rules: Yup.string().required(),
                 },
@@ -32,9 +32,15 @@ export default {
                     rules: Yup.number().min(10).required(),
                 },
                 {
-                    label: "Message",
-                    name: 'message',
-                    as: 'textarea',
+                    label: "Company",
+                    name: 'company',
+                    as: 'input',
+                    rules: Yup.string().min(2).required(),
+                },
+                {
+                    label: "Summarize Your Needs",
+                    name: 'summary',
+                    as: 'input',
                     rules: Yup.string().required(),
                 },
             ]
