@@ -26,6 +26,7 @@ htmlcov/
 
 proxy.config.yml
 .env
+.vite
 
 # UI files
 dist/
