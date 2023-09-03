@@ -6,13 +6,14 @@
         <div
             v-for="{ as, name, label, ...attrs } in schema.fields" 
             :key="name"
+            class="form-group"
             >
             <label :for="name">{{ label }}</label>
-            <Field :as="as" :id="name" :name="name" v-bind="attrs"/>
+            <Field :as="as" :id="name" :name="name" v-bind="attrs" class="form-control" />
             <ErrorMessage :name="name" />
         </div>
 
-        <button>Submit</button>
+        <button class="btn btn--primary">Submit</button>
     </Form>
 </template>
 

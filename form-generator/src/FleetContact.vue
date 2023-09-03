@@ -40,7 +40,7 @@ export default {
                 {
                     label: "Summarize Your Needs",
                     name: 'summary',
-                    as: 'input',
+                    as: 'textarea',
                     rules: Yup.string().required(),
                 },
             ]
