@@ -1,14 +1,19 @@
 import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router"
 import App from "./App.vue"
-import Contact from "./Contact.vue";
-import AltContact from "./AltContact.vue";
 import Home from "./Home.vue";
+
+import WebDevelopment from "./WebDevelopment.vue";
+import Devops from "./Devops.vue";
+import StaffAugmentation from "./StaffAugmentation.vue";
+import RemediationServices from "./RemediationServices.vue";
 
 const routes = [
       { name: 'home',  path: '/', component: Home },
-      { name: 'contact',  path: '/contact', component: Contact },
-      { name: 'alt-contact', path: '/alt', component: AltContact }
+      { name: 'web-development',  path: '/web-development', component: WebDevelopment },
+      { name: 'devops',  path: '/devops', component: Devops },
+      { name: 'staff-augmentation',  path: '/staff-augmentation', component: StaffAugmentation },
+      { name: 'remediation-services',  path: '/remediation-services', component: RemediationServices },
 ]
 
 const router = createRouter({

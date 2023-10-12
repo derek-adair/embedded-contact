@@ -1,11 +1,8 @@
 <template>
-    <p>This is the initial view</p>
-  <p>
-    <!-- use the router-link component for navigation. -->
-    <!-- specify the link by passing the `to` prop. -->
-    <!-- `<router-link>` will render an `<a>` tag with the correct `href` attribute -->
-    <router-link to="/contact">Contact</router-link>
-    <router-link to="/alt">Alt Contact</router-link>
-  </p>
+    <!-- thanks https://getcssscan.com/css-buttons-examples -->
+    <router-link class="btn-89" to="/web-development">Web Development</router-link>
+    <router-link class="btn-89" to="/devops">Dev Ops</router-link>
+    <router-link class="btn-89" to="/remediation-services">Remdiation Services</router-link>
+    <router-link class="btn-89" to="/staff-augmentation">Staff Augmentation</router-link>
 </template>
 
