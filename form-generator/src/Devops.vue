@@ -37,6 +37,39 @@ export default {
                     as: 'textarea',
                     rules: Yup.string().required(),
                 },
+                {
+                    label: "Budget",
+                    name: 'budget',
+                    as: 'textarea',
+                    placeholder: 'How much funding do you have allocated for this project? Do you have a do not exceed figure?',
+                    rules: Yup.string().required()
+                },
+                {
+                    label: "Infrastructure",
+                    name: 'infrastructure',
+                    placeholder: 'What infrastructure do you need help supporting?',
+                    as: 'textarea',
+                    rules: Yup.string().required(),
+                },
+                {
+                    label: "How many devs?",
+                    name: 'dev_count',
+                    placeholder: "how many developers are on your team?",
+                    as: 'input',
+                    rules: Yup.string().required(),
+                },
+                {
+                    label: "Traffic",
+                    name: 'traffic',
+                    placeholder: 'How much traffic does your platform need to support?',
+                    as: 'textarea',
+                    rules: Yup.string().required(),
+                },
+                {
+                    label: "Do you need CI/CD maintained?",
+                    name: 'cicd',
+                    type: 'checkbox',
+                },
             ]
         }
 

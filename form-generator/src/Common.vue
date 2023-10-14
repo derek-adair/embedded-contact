@@ -37,29 +37,6 @@ export default {
                     as: 'textarea',
                     rules: Yup.string().required(),
                 },
-                {
-                    label: "What role(s) do you need filled?",
-                    name: 'roles',
-                    as: 'textarea',
-                    rules: Yup.string().required(),
-                },
-                {
-                    label: "When?",
-                    name: 'when',
-                    as: 'textarea',
-                    rules: Yup.string().required(),
-                },
-                {
-                    label: "How long?",
-                    name: 'length',
-                    as: 'textarea',
-                    rules: Yup.string().required(),
-                },
-                {
-                    label: "What is your budget?",
-                    name: 'budget',
-                    rules: Yup.string().required(),
-                },
             ]
         }
 

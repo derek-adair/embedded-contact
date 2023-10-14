@@ -37,6 +37,13 @@ export default {
                     as: 'textarea',
                     rules: Yup.string().required(),
                 },
+                {
+                    label: "What can we help you with?",
+                    name: 'company_description',
+                    placeholder: 'As much relevant detail as possible and NO more',
+                    as: 'textarea',
+                    rules: Yup.string().required(),
+                },
             ]
         }
 
