@@ -12,7 +12,7 @@
             <ErrorMessage :name="name" />
         </div>
 
-        <button>Submit</button>
+        <button class="btn-89">Submit</button>
     </Form>
 </template>
 

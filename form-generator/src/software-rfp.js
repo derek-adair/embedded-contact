@@ -27,4 +27,4 @@ const app = createApp(App)
 // whole app router-aware.
 app.use(router)
 
-app.mount('#app')
+app.mount('#rfp-contact')
